@@ -1,16 +1,16 @@
 <template>
   <div>
     <h2>チャートのテスト描画</h2>
-    <chart />
+    <balance-sheet />
   </div>
 </template>
 
 <script>
-import Chart from '~/components/Chart.vue'
+import BalanceSheet from '~/components/BalanceSheet.vue'
 
 export default {
   components: {
-    Chart,
+    BalanceSheet,
   },
 }
 </script>
