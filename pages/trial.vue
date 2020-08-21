@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>チャートのテスト描画</h2>
-    <balance-sheet v-bind="bsData" />
+    <balance-sheet :chart-data="datacollection" />
   </div>
 </template>
 
@@ -14,15 +14,63 @@ export default {
   },
   data() {
     return {
-      bsData: {
-        // 資産
-        assets: 100,
-        // 負債
-        liabilities: 30,
-        // 純資産
-        netAssets: 70,
+      datacollection: null,
+      chartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          xAxes: [
+            {
+              stacked: true,
+            },
+          ],
+          yAxes: [
+            {
+              stacked: true,
+            },
+          ],
+        },
       },
     }
+  },
+  mounted() {
+    this.fillData()
+  },
+  methods: {
+    fillData() {
+      this.datacollection = {
+        labels: ['運用状況', '調達状況'],
+        datasets: [
+          {
+            type: 'bar',
+            barPercentage: 1.2,
+            label: '資産',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255,99,132,1)',
+            borderWidth: 1,
+            data: [100, null],
+          },
+          {
+            type: 'bar',
+            barPercentage: 1.2,
+            label: '純資産',
+            data: [null, 30],
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+          },
+          {
+            type: 'bar',
+            barPercentage: 1.2,
+            label: '負債',
+            data: [null, 70],
+            backgroundColor: 'rgba(255, 206, 86, 0.2)',
+            borderColor: 'rgba(255, 206, 86, 1)',
+            borderWidth: 1,
+          },
+        ],
+      }
+    },
   },
 }
 </script>

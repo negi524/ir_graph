@@ -1,28 +1,14 @@
 <script>
-import { Bar } from 'vue-chartjs'
+import { Bar, mixins } from 'vue-chartjs'
+const { reactiveProp } = mixins
 
 export default {
   extends: Bar,
+  mixins: [reactiveProp],
   props: {
-    // 資産
-    assets: {
-      type: Number,
-      default: 0,
-    },
-    // 負債
-    liabilities: {
-      type: Number,
-      default: 0,
-    },
-    // 純資産
-    netAssets: {
-      type: Number,
-      default: 0,
-    },
-  },
-  data() {
-    return {
-      chartData: {
+    chartData: {
+      type: Object,
+      default: () => ({
         labels: ['運用状況', '調達状況'],
         datasets: [
           {
@@ -32,13 +18,13 @@ export default {
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderColor: 'rgba(255,99,132,1)',
             borderWidth: 1,
-            data: [this.assets, null],
+            data: [0, null],
           },
           {
             type: 'bar',
             barPercentage: 1.2,
             label: '純資産',
-            data: [null, this.netAssets],
+            data: [null, 0],
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
@@ -47,14 +33,18 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '負債',
-            data: [null, this.liabilities],
+            data: [null, 0],
             backgroundColor: 'rgba(255, 206, 86, 0.2)',
             borderColor: 'rgba(255, 206, 86, 1)',
             borderWidth: 1,
           },
         ],
-      },
-      options: {
+      }),
+    },
+    options: {
+      type: Object,
+      requied: false,
+      default: () => ({
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -69,8 +59,8 @@ export default {
             },
           ],
         },
-      },
-    }
+      }),
+    },
   },
   mounted() {
     this.renderChart(this.chartData, this.options)
