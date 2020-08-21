@@ -1,11 +1,14 @@
 <script>
-import { Bar } from 'vue-chartjs'
+import { Bar, mixins } from 'vue-chartjs'
+const { reactiveProp } = mixins
 
 export default {
   extends: Bar,
-  data() {
-    return {
-      chartData: {
+  mixins: [reactiveProp],
+  props: {
+    chartData: {
+      type: Object,
+      default: () => ({
         labels: ['運用状況', '調達状況'],
         datasets: [
           {
@@ -15,13 +18,13 @@ export default {
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderColor: 'rgba(255,99,132,1)',
             borderWidth: 1,
-            data: [100, null],
+            data: [0, null],
           },
           {
             type: 'bar',
             barPercentage: 1.2,
             label: '純資産',
-            data: [null, 30],
+            data: [null, 0],
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
@@ -30,14 +33,18 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '負債',
-            data: [null, 70],
+            data: [null, 0],
             backgroundColor: 'rgba(255, 206, 86, 0.2)',
             borderColor: 'rgba(255, 206, 86, 1)',
             borderWidth: 1,
           },
         ],
-      },
-      options: {
+      }),
+    },
+    options: {
+      type: Object,
+      requied: false,
+      default: () => ({
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -52,8 +59,8 @@ export default {
             },
           ],
         },
-      },
-    }
+      }),
+    },
   },
   mounted() {
     this.renderChart(this.chartData, this.options)
