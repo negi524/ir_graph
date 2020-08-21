@@ -4,15 +4,15 @@
     <div class="row my-5 mx-4">
       <div class="col-3"><label>資産</label></div>
       <div class="col-9">
-        <b-form-input v-model="assets" placeholder="資産" />
+        <b-form-input v-model="assets" type="number" placeholder="資産" />
       </div>
       <div class="col-3"><label>負債</label></div>
       <div class="col-9">
-        <b-form-input v-model="liabilities" placeholder="負債" />
+        <b-form-input v-model="liabilities" type="number" placeholder="負債" />
       </div>
       <div class="col-3"><label>純資産</label></div>
       <div class="col-9">
-        <b-form-input v-model="netAssets" placeholder="純資産" />
+        <b-form-input v-model="netAssets" type="number" placeholder="純資産" />
       </div>
       <b-button
         class="mt-4 mx-auto"
