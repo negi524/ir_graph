@@ -3,7 +3,7 @@ name: Deploy GitHub Pages
 # masterブランチへのpushをトリガーとして実行
 on:
   push:
-    branches: [master]
+    branches: [feature/pipeline]
 # on: [push]
 
 jobs:
