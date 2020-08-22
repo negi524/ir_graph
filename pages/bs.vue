@@ -1,27 +1,31 @@
 <template>
   <div class="container">
     <h2 class="mt-5">貸借対照表（B/S）</h2>
-    <div class="row my-5 mx-4">
-      <div class="col-3"><label>資産</label></div>
-      <div class="col-9">
-        <b-form-input v-model="assets" type="number" placeholder="資産" />
+    <div class="row mt-4">
+      <div class="col-4 my-auto">
+        <div class="form-group row">
+          <label class="col-6 col-form-label">資産</label>
+          <b-form-input v-model="assets" class="col-6" type="number" />
+        </div>
+        <div class="form-group row">
+          <label class="col-6 col-form-label">負債</label>
+          <b-form-input v-model="liabilities" class="col-6" type="number" />
+        </div>
+        <div class="form-group row">
+          <label class="col-6 col-form-label">純資産</label>
+          <b-form-input v-model="netAssets" class="col-6" type="number" />
+        </div>
+        <div class="row mt-3">
+          <b-button
+            class="mx-auto"
+            variant="outline-primary"
+            @click="fillData()"
+            >反映
+          </b-button>
+        </div>
       </div>
-      <div class="col-3"><label>負債</label></div>
-      <div class="col-9">
-        <b-form-input v-model="liabilities" type="number" placeholder="負債" />
-      </div>
-      <div class="col-3"><label>純資産</label></div>
-      <div class="col-9">
-        <b-form-input v-model="netAssets" type="number" placeholder="純資産" />
-      </div>
-      <b-button
-        class="mt-4 mx-auto"
-        variant="outline-primary"
-        @click="fillData()"
-        >反映
-      </b-button>
+      <balance-sheet class="col-8" :chart-data="datacollection" />
     </div>
-    <balance-sheet :chart-data="datacollection" />
   </div>
 </template>
 
