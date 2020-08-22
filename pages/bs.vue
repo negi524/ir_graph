@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2 class="mt-5">バランスシート</h2>
+    <h2 class="mt-5">貸借対照表（B/S）</h2>
     <div class="row my-5 mx-4">
       <div class="col-3"><label>資産</label></div>
       <div class="col-9">
@@ -56,8 +56,8 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '資産',
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255,99,132,1)',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
             data: [this.assets, null],
           },
@@ -66,8 +66,8 @@ export default {
             barPercentage: 1.2,
             label: '純資産',
             data: [null, this.netAssets],
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
           },
           {
@@ -75,8 +75,8 @@ export default {
             barPercentage: 1.2,
             label: '負債',
             data: [null, this.liabilities],
-            backgroundColor: 'rgba(255, 206, 86, 0.2)',
-            borderColor: 'rgba(255, 206, 86, 1)',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255,99,132,1)',
             borderWidth: 1,
           },
         ],

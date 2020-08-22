@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2 class="mt-5">損益計算書</h2>
+    <h2 class="mt-5">損益計算書（P/L）</h2>
     <profit-and-loss />
   </div>
 </template>
