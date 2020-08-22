@@ -1,36 +1,36 @@
 <template>
   <div class="container">
     <h2 class="mt-5">損益計算書（P/L）</h2>
-    <div class="row mt-5 mx-4">
-      <label class="col-3 col-form-label">利益</label>
-      <div class="col-9">
-        <b-form-input v-model="netIncome" type="number" placeholder="利益" />
+    <div class="row mt-4">
+      <div class="col-4 my-auto">
+        <div class="form-group row">
+          <label class="col-6 col-form-label">利益</label>
+          <b-form-input v-model="netIncome" class="col-6" type="number" />
+        </div>
+        <div class="form-group row">
+          <label class="col-6 col-form-label">費用</label>
+          <b-form-input v-model="expenses" class="col-6" type="number" />
+        </div>
+        <div class="form-group row">
+          <label class="col-6 col-form-label">収益</label>
+          <b-form-input v-model="revenue" class="col-6" type="number" />
+        </div>
+        <div class="form-group row">
+          <label class="col-6 col-form-label">損失</label>
+          <b-form-input v-model="netLoss" class="col-6" type="number" />
+        </div>
+        <div class="row mt-3">
+          <b-button
+            class="mx-auto"
+            variant="outline-primary"
+            @click="fillData()"
+          >
+            反映
+          </b-button>
+        </div>
       </div>
+      <profit-and-loss class="col-8" :chart-data="datacollection" />
     </div>
-    <div class="row my-1 mx-4">
-      <label class="col-3 col-form-label">費用</label>
-      <div class="col-9">
-        <b-form-input v-model="expenses" type="number" placeholder="費用" />
-      </div>
-    </div>
-    <div class="row my-1 mx-4">
-      <label class="col-3 col-form-label">収益</label>
-      <div class="col-9">
-        <b-form-input v-model="revenue" type="number" placeholder="収益" />
-      </div>
-    </div>
-    <div class="row my-1 mx-4">
-      <label class="col-3 col-form-label">損失</label>
-      <div class="col-9">
-        <b-form-input v-model="netLoss" type="number" placeholder="損失" />
-      </div>
-    </div>
-    <div class="row my-5">
-      <b-button class="mx-auto" variant="outline-primary" @click="fillData()">
-        反映
-      </b-button>
-    </div>
-    <profit-and-loss class="mt-4" :chart-data="datacollection" />
   </div>
 </template>
 
