@@ -4,7 +4,6 @@ name: Deploy GitHub Pages
 on:
   push:
     branches: [feature/pipeline]
-# on: [push]
 
 jobs:
   # 製品のテストを実施
