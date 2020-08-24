@@ -3,7 +3,10 @@ export default {
    ** Nuxt rendering mode
    ** See https://nuxtjs.org/api/configuration-mode
    */
-  mode: 'universal',
+  mode: 'spa',
+  router: {
+    base: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/ir_graph/' : '/',
+  },
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -14,6 +17,10 @@ export default {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
+    base: {
+      // GitHub Pages のサブディレクトリで運用するため
+      href: 'router.base',
+    },
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
@@ -24,7 +31,16 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href:
+          process.env.DEPLOY_ENV === 'GH_PAGES'
+            ? '/ir_graph/favicon.ico'
+            : '/favicon.ico',
+      },
+    ],
   },
   /*
    ** Global CSS
