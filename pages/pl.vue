@@ -5,7 +5,7 @@
       <div class="col-4 my-auto">
         <div class="form-group row">
           <div class="col-6">費用</div>
-          <div class="col-6 text-right">{{ expenses.getSum() }}</div>
+          <div class="col-6 text-right">{{ expenses.sum() }}</div>
           <!-- 内訳 -->
           <ul>
             <li class="row">
@@ -53,7 +53,7 @@
         </div>
         <div class="form-group row">
           <div class="col-6">収益</div>
-          <div class="col-6 text-right">{{ revenue.getSum() }}</div>
+          <div class="col-6 text-right">{{ revenue.sum() }}</div>
           <!-- 内訳 -->
           <ul>
             <li class="row">
@@ -132,7 +132,7 @@ export default {
         /**
          * 費用の合計値を計算して返却する
          */
-        getSum() {
+        sum() {
           let sum = 0
           // eslint-disable-next-line no-unused-vars
           for (const [key, value] of Object.entries(this)) {
@@ -152,7 +152,7 @@ export default {
         /**
          * 収益の合計値を計算して返却する
          */
-        getSum() {
+        sum() {
           let sum = 0
           // eslint-disable-next-line no-unused-vars
           for (const [key, value] of Object.entries(this)) {
