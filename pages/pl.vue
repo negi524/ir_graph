@@ -133,13 +133,12 @@ export default {
          * 費用の合計値を計算して返却する
          */
         getSum() {
-          return (
-            parseInt(this.cogs) +
-            parseInt(this.sga) +
-            parseInt(this.nonOperatingExpense) +
-            parseInt(this.extraordinaryLoss) +
-            parseInt(this.corporateTax)
-          )
+          let sum = 0
+          // eslint-disable-next-line no-unused-vars
+          for (const [key, value] of Object.entries(this)) {
+            sum += parseInt(value, 10) || 0
+          }
+          return sum
         },
       },
       // 収益
@@ -154,11 +153,12 @@ export default {
          * 収益の合計値を計算して返却する
          */
         getSum() {
-          return (
-            parseInt(this.sales) +
-            parseInt(this.nonOperatingIncome) +
-            parseInt(this.extraordinaryGain)
-          )
+          let sum = 0
+          // eslint-disable-next-line no-unused-vars
+          for (const [key, value] of Object.entries(this)) {
+            sum += parseInt(value, 10) || 0
+          }
+          return sum
         },
       },
       // 利益
@@ -190,8 +190,44 @@ export default {
           {
             type: 'bar',
             barPercentage: 1.2,
-            label: '費用',
-            data: [this.expenses.getSum(), null],
+            label: '法人税等',
+            data: [this.expenses.corporateTax, null],
+            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+            borderColor: 'rgba(255, 159, 64, 1)',
+            borderWidth: 1,
+          },
+          {
+            type: 'bar',
+            barPercentage: 1.2,
+            label: '特別損失',
+            data: [this.expenses.extraordinaryLoss, null],
+            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+            borderColor: 'rgba(255, 159, 64, 1)',
+            borderWidth: 1,
+          },
+          {
+            type: 'bar',
+            barPercentage: 1.2,
+            label: '営業外費用',
+            data: [this.expenses.nonOperatingExpense, null],
+            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+            borderColor: 'rgba(255, 159, 64, 1)',
+            borderWidth: 1,
+          },
+          {
+            type: 'bar',
+            barPercentage: 1.2,
+            label: '販管費',
+            data: [this.expenses.sga, null],
+            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+            borderColor: 'rgba(255, 159, 64, 1)',
+            borderWidth: 1,
+          },
+          {
+            type: 'bar',
+            barPercentage: 1.2,
+            label: '売上原価',
+            data: [this.expenses.cogs, null],
             backgroundColor: 'rgba(255, 159, 64, 0.2)',
             borderColor: 'rgba(255, 159, 64, 1)',
             borderWidth: 1,
@@ -208,8 +244,26 @@ export default {
           {
             type: 'bar',
             barPercentage: 1.2,
-            label: '収益',
-            data: [null, this.revenue.getSum()],
+            label: '特別利益',
+            data: [null, this.revenue.extraordinaryGain],
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+          },
+          {
+            type: 'bar',
+            barPercentage: 1.2,
+            label: '営業外収益',
+            data: [null, this.revenue.nonOperatingIncome],
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+          },
+          {
+            type: 'bar',
+            barPercentage: 1.2,
+            label: '売上高',
+            data: [null, this.revenue.sales],
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
