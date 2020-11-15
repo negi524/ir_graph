@@ -4,49 +4,81 @@
     <div class="row mt-4">
       <div class="col-4 my-auto">
         <div class="form-group row">
-          <label class="col-6 col-form-label">費用</label>
-          <b-form-input v-model="expenses.sum" class="col-6" type="number" />
+          <div class="col-6">費用</div>
+          <div class="col-6 text-right">{{ expenses.getSum() }}</div>
           <!-- 内訳 -->
           <ul>
             <li class="row">
               <label class="col-7 col-form-label">売上原価</label>
-              <b-form-input class="col-5" type="number" />
+              <b-form-input
+                v-model="expenses.cogs"
+                class="col-5"
+                type="number"
+              />
             </li>
             <li class="row">
               <label class="col-7 col-form-label">販管費</label>
-              <b-form-input class="col-5" type="number" />
+              <b-form-input
+                v-model="expenses.sga"
+                class="col-5"
+                type="number"
+              />
             </li>
             <li class="row">
               <label class="col-7 col-form-label">営業外費用</label>
-              <b-form-input class="col-5" type="number" />
+              <b-form-input
+                v-model="expenses.nonOperatingExpense"
+                class="col-5"
+                type="number"
+              />
             </li>
             <li class="row">
               <label class="col-7 col-form-label">特別損失</label>
-              <b-form-input class="col-5" type="number" />
+              <b-form-input
+                v-model="expenses.extraordinaryLoss"
+                class="col-5"
+                type="number"
+              />
             </li>
             <li class="row">
               <label class="col-7 col-form-label">法人税等</label>
-              <b-form-input class="col-5" type="number" />
+              <b-form-input
+                v-model="expenses.corporateTax"
+                class="col-5"
+                type="number"
+              />
             </li>
           </ul>
           <!-- 内訳 -->
         </div>
         <div class="form-group row">
-          <label class="col-6 col-form-label">収益</label>
-          <b-form-input v-model="revenue.sum" class="col-6" type="number" />
+          <div class="col-6">収益</div>
+          <div class="col-6 text-right">{{ revenue.getSum() }}</div>
           <!-- 内訳 -->
           <ul>
             <li class="row">
               <label class="col-7 col-form-label">売上高</label>
-              <b-form-input class="col-5" type="number" />
+              <b-form-input
+                v-model="revenue.sales"
+                class="col-5"
+                type="number"
+              />
             </li>
             <li class="row">
               <label class="col-7 col-form-label">営業外収益</label>
-              <b-form-input class="col-5" type="number" />
+              <b-form-input
+                v-model="revenue.nonOperatingIncome"
+                class="col-5"
+                type="number"
+              />
             </li>
             <li class="row">
               <label class="col-7 col-form-label">特別利益</label>
-              <b-form-input class="col-5" type="number" />
+              <b-form-input
+                v-model="revenue.extraordinaryGain"
+                class="col-5"
+                type="number"
+              />
             </li>
           </ul>
           <!-- 内訳 -->
@@ -87,11 +119,47 @@ export default {
       datacollection: null,
       // 費用
       expenses: {
-        sum: 80,
+        // 売上原価
+        cogs: 10,
+        // 販管費(Salling, General, Administration)
+        sga: 20,
+        // 営業外費用
+        nonOperatingExpense: 30,
+        // 特別損失
+        extraordinaryLoss: 0,
+        // 法人税等
+        corporateTax: 20,
+        /**
+         * 費用の合計値を計算して返却する
+         */
+        getSum() {
+          return (
+            parseInt(this.cogs) +
+            parseInt(this.sga) +
+            parseInt(this.nonOperatingExpense) +
+            parseInt(this.extraordinaryLoss) +
+            parseInt(this.corporateTax)
+          )
+        },
       },
       // 収益
       revenue: {
-        sum: 100,
+        // 売上高
+        sales: 50,
+        // 営業外収益
+        nonOperatingIncome: 50,
+        // 特別利益
+        extraordinaryGain: 0,
+        /**
+         * 収益の合計値を計算して返却する
+         */
+        getSum() {
+          return (
+            parseInt(this.sales) +
+            parseInt(this.nonOperatingIncome) +
+            parseInt(this.extraordinaryGain)
+          )
+        },
       },
       // 利益
       netIncome: 20,
@@ -123,7 +191,7 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '費用',
-            data: [this.expenses.sum, null],
+            data: [this.expenses.getSum(), null],
             backgroundColor: 'rgba(255, 159, 64, 0.2)',
             borderColor: 'rgba(255, 159, 64, 1)',
             borderWidth: 1,
@@ -141,7 +209,7 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '収益',
-            data: [null, this.revenue.sum],
+            data: [null, this.revenue.getSum()],
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
