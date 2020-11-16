@@ -16,12 +16,7 @@
           <b-form-input v-model="netAssets" class="col-6" type="number" />
         </div>
         <div class="row mt-3">
-          <b-button
-            class="mx-auto"
-            variant="outline-primary"
-            @click="fillData()"
-            >反映
-          </b-button>
+          <b-button class="mx-auto" variant="outline-primary" @click="fillData()">反映</b-button>
         </div>
       </div>
       <balance-sheet class="col-8" :chart-data="datacollection" />
