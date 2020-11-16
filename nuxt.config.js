@@ -37,8 +37,8 @@ export default {
         type: 'image/x-icon',
         href:
           process.env.DEPLOY_ENV === 'GH_PAGES'
-            ? '/ir_graph/favicon.ico'
-            : '/favicon.ico',
+            ? '/ir_graph/negi.ico'
+            : '/negi.ico',
       },
     ],
   },
