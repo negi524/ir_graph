@@ -2,7 +2,11 @@
   <div class="container">
     <h2 class="mt-5">損益計算書（P/L）</h2>
     <div class="row mt-4">
-      <div class="col-4 my-auto">
+      <profit-and-loss
+        class="col-md-8 col-sm-12"
+        :chart-data="datacollection"
+      />
+      <div class="col-md-4 col-sm-12 my-auto">
         <div class="form-group row">
           <div class="col-6">費用</div>
           <div class="col-6 text-right">{{ expenses.sum() }}</div>
@@ -101,7 +105,6 @@
           </b-button>
         </div>
       </div>
-      <profit-and-loss class="col-8" :chart-data="datacollection" />
     </div>
   </div>
 </template>
