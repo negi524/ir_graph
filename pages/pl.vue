@@ -88,12 +88,32 @@
           <!-- 内訳 -->
         </div>
         <div class="form-group row">
-          <label class="col-6 col-form-label">利益</label>
-          <b-form-input v-model="netIncome" class="col-6" type="number" />
+          <div class="col-6">利益</div>
+          <div class="col-6 text-right">{{ income.sum() }}</div>
+          <ul>
+            <li class="row">
+              <label class="col-7 col-form-label">当期純利益</label>
+              <b-form-input
+                v-model="income.netIncome"
+                class="col-5"
+                type="number"
+              />
+            </li>
+          </ul>
         </div>
         <div class="form-group row">
-          <label class="col-6 col-form-label">損失</label>
-          <b-form-input v-model="netLoss" class="col-6" type="number" />
+          <div class="col-6">損失</div>
+          <div class="col-6 text-right">{{ loss.sum() }}</div>
+          <ul>
+            <li class="row">
+              <label class="col-7 col-form-label">当期純損失</label>
+              <b-form-input
+                v-model="loss.netLoss"
+                class="col-5"
+                type="number"
+              />
+            </li>
+          </ul>
         </div>
         <div class="row mt-3">
           <b-button
@@ -165,9 +185,25 @@ export default {
         },
       },
       // 利益
-      netIncome: 20,
+      income: {
+        netIncome: 20,
+        /**
+         * 利益の合計値を計算して返却する
+         */
+        sum() {
+          return parseInt(this.netIncome) || 0
+        },
+      },
       // 損失
-      netLoss: 0,
+      loss: {
+        netLoss: 0,
+        /**
+         * 損失の合計値を計算して返却する
+         */
+        sum() {
+          return parseInt(this.netLoss) || 0
+        },
+      },
     }
   },
   mounted() {
@@ -188,7 +224,7 @@ export default {
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
-            data: [this.netIncome, null],
+            data: [this.income.netIncome, null],
           },
           {
             type: 'bar',
@@ -239,7 +275,7 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '損失',
-            data: [null, this.netLoss],
+            data: [null, this.loss.netLoss],
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderColor: 'rgba(255,99,132,1)',
             borderWidth: 1,
