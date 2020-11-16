@@ -18,6 +18,8 @@
                 v-model="expenses.cogs"
                 class="col-5"
                 type="number"
+                step="1"
+                min="0"
               />
             </li>
             <li class="row">
@@ -26,6 +28,8 @@
                 v-model="expenses.sga"
                 class="col-5"
                 type="number"
+                step="1"
+                min="0"
               />
             </li>
             <li class="row">
@@ -34,6 +38,8 @@
                 v-model="expenses.nonOperatingExpense"
                 class="col-5"
                 type="number"
+                step="1"
+                min="0"
               />
             </li>
             <li class="row">
@@ -42,6 +48,8 @@
                 v-model="expenses.extraordinaryLoss"
                 class="col-5"
                 type="number"
+                step="1"
+                min="0"
               />
             </li>
             <li class="row">
@@ -50,6 +58,8 @@
                 v-model="expenses.corporateTax"
                 class="col-5"
                 type="number"
+                step="1"
+                min="0"
               />
             </li>
           </ul>
@@ -66,6 +76,8 @@
                 v-model="revenue.sales"
                 class="col-5"
                 type="number"
+                step="1"
+                min="0"
               />
             </li>
             <li class="row">
@@ -74,6 +86,8 @@
                 v-model="revenue.nonOperatingIncome"
                 class="col-5"
                 type="number"
+                step="1"
+                min="0"
               />
             </li>
             <li class="row">
@@ -82,6 +96,8 @@
                 v-model="revenue.extraordinaryGain"
                 class="col-5"
                 type="number"
+                step="1"
+                min="0"
               />
             </li>
           </ul>
@@ -97,6 +113,8 @@
                 v-model="income.netIncome"
                 class="col-5"
                 type="number"
+                step="1"
+                min="0"
               />
             </li>
           </ul>
@@ -111,6 +129,8 @@
                 v-model="loss.netLoss"
                 class="col-5"
                 type="number"
+                step="1"
+                min="0"
               />
             </li>
           </ul>
@@ -275,7 +295,7 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '損失',
-            data: [null, this.loss.netLoss],
+            data: [null, -1 * this.loss.netLoss],
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderColor: 'rgba(255,99,132,1)',
             borderWidth: 1,
@@ -313,3 +333,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+input:invalid {
+  border: solid 1px red;
+}
+</style>
