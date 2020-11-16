@@ -253,7 +253,7 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '損失',
-            data: [null, -1 * this.loss.sum()],
+            data: [null, this.loss.sum()],
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderColor: 'rgba(255,99,132,1)',
             borderWidth: 1,
