@@ -2,136 +2,143 @@
   <div class="container">
     <h2 class="mt-5">損益計算書（P/L）</h2>
     <div class="row mt-4">
-      <profit-and-loss
-        class="col-md-8 col-sm-12"
-        :chart-data="datacollection"
-      />
-      <div class="col-md-4 col-sm-12 my-auto">
-        <div class="form-group row">
+      <profit-and-loss class="col-md-8" :chart-data="datacollection" />
+      <div class="col-md-4">
+        <div class="row">
           <div class="col-6">費用</div>
           <div class="col-6 text-right">{{ expenses.sum() }}</div>
           <!-- 内訳 -->
-          <ul>
+          <ul class="mt-2">
             <li class="row">
-              <label class="col-7 col-form-label">売上原価</label>
-              <b-form-input
-                v-model="expenses.cogs"
-                class="col-5"
-                type="number"
-                step="1"
-                min="0"
-              />
+              <label class="col-6 col-form-label">売上原価</label>
+              <div class="col-6">
+                <b-form-input
+                  v-model="expenses.cogs"
+                  type="number"
+                  step="1"
+                  min="0"
+                />
+              </div>
             </li>
             <li class="row">
-              <label class="col-7 col-form-label">販管費</label>
-              <b-form-input
-                v-model="expenses.sga"
-                class="col-5"
-                type="number"
-                step="1"
-                min="0"
-              />
+              <label class="col-6 col-form-label">販管費</label>
+              <div class="col-6">
+                <b-form-input
+                  v-model="expenses.sga"
+                  type="number"
+                  step="1"
+                  min="0"
+                />
+              </div>
             </li>
             <li class="row">
-              <label class="col-7 col-form-label">営業外費用</label>
-              <b-form-input
-                v-model="expenses.nonOperatingExpense"
-                class="col-5"
-                type="number"
-                step="1"
-                min="0"
-              />
+              <label class="col-6 col-form-label">営業外費用</label>
+              <div class="col-6">
+                <b-form-input
+                  v-model="expenses.nonOperatingExpense"
+                  type="number"
+                  step="1"
+                  min="0"
+                />
+              </div>
             </li>
             <li class="row">
-              <label class="col-7 col-form-label">特別損失</label>
-              <b-form-input
-                v-model="expenses.extraordinaryLoss"
-                class="col-5"
-                type="number"
-                step="1"
-                min="0"
-              />
+              <label class="col-6 col-form-label">特別損失</label>
+              <div class="col-6">
+                <b-form-input
+                  v-model="expenses.extraordinaryLoss"
+                  type="number"
+                  step="1"
+                  min="0"
+                />
+              </div>
             </li>
             <li class="row">
-              <label class="col-7 col-form-label">法人税等</label>
-              <b-form-input
-                v-model="expenses.corporateTax"
-                class="col-5"
-                type="number"
-                step="1"
-                min="0"
-              />
+              <label class="col-6 col-form-label">法人税等</label>
+              <div class="col-6">
+                <b-form-input
+                  v-model="expenses.corporateTax"
+                  type="number"
+                  step="1"
+                  min="0"
+                />
+              </div>
             </li>
           </ul>
           <!-- 内訳 -->
         </div>
-        <div class="form-group row">
+        <div class="row">
           <div class="col-6">収益</div>
           <div class="col-6 text-right">{{ revenue.sum() }}</div>
           <!-- 内訳 -->
-          <ul>
+          <ul class="mt-2">
             <li class="row">
-              <label class="col-7 col-form-label">売上高</label>
-              <b-form-input
-                v-model="revenue.sales"
-                class="col-5"
-                type="number"
-                step="1"
-                min="0"
-              />
+              <label class="col-6 col-form-label">売上高</label>
+              <div class="col-6">
+                <b-form-input
+                  v-model="revenue.sales"
+                  type="number"
+                  step="1"
+                  min="0"
+                />
+              </div>
             </li>
             <li class="row">
-              <label class="col-7 col-form-label">営業外収益</label>
-              <b-form-input
-                v-model="revenue.nonOperatingIncome"
-                class="col-5"
-                type="number"
-                step="1"
-                min="0"
-              />
+              <label class="col-6 col-form-label">営業外収益</label>
+              <div class="col-6">
+                <b-form-input
+                  v-model="revenue.nonOperatingIncome"
+                  type="number"
+                  step="1"
+                  min="0"
+                />
+              </div>
             </li>
             <li class="row">
-              <label class="col-7 col-form-label">特別利益</label>
-              <b-form-input
-                v-model="revenue.extraordinaryGain"
-                class="col-5"
-                type="number"
-                step="1"
-                min="0"
-              />
+              <label class="col-6 col-form-label">特別利益</label>
+              <div class="col-6">
+                <b-form-input
+                  v-model="revenue.extraordinaryGain"
+                  type="number"
+                  step="1"
+                  min="0"
+                />
+              </div>
             </li>
           </ul>
           <!-- 内訳 -->
         </div>
-        <div class="form-group row">
+        <div class="row">
           <div class="col-6">利益</div>
           <div class="col-6 text-right">{{ income.sum() }}</div>
           <ul>
             <li class="row">
-              <label class="col-7 col-form-label">当期純利益</label>
-              <b-form-input
-                v-model="income.netIncome"
-                class="col-5"
-                type="number"
-                step="1"
-                min="0"
-              />
+              <label class="col-6 col-form-label">当期純利益</label>
+              <div class="col-6">
+                <b-form-input
+                  v-model="income.netIncome"
+                  type="number"
+                  step="1"
+                  min="0"
+                />
+              </div>
             </li>
           </ul>
         </div>
-        <div class="form-group row">
+        <div class="row">
           <div class="col-6">損失</div>
           <div class="col-6 text-right">{{ loss.sum() }}</div>
           <ul>
             <li class="row">
-              <label class="col-7 col-form-label">当期純損失</label>
-              <b-form-input
-                v-model="loss.netLoss"
-                class="col-5"
-                type="number"
-                step="1"
-                min="0"
-              />
+              <label class="col-6 col-form-label">当期純損失</label>
+              <div class="col-6">
+                <b-form-input
+                  v-model="loss.netLoss"
+                  type="number"
+                  step="1"
+                  min="0"
+                />
+              </div>
             </li>
           </ul>
         </div>
@@ -244,7 +251,7 @@ export default {
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
-            data: [this.income.netIncome, null],
+            data: [this.income.sum(), null],
           },
           {
             type: 'bar',
@@ -295,7 +302,7 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '損失',
-            data: [null, -1 * this.loss.netLoss],
+            data: [null, -1 * this.loss.sum()],
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderColor: 'rgba(255,99,132,1)',
             borderWidth: 1,
