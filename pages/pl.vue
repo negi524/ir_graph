@@ -6,7 +6,7 @@
       <div class="col-md-4 my-auto">
         <div class="row">
           <div class="col-6">費用</div>
-          <div class="col-6 text-right">{{ expenses.sum() }}</div>
+          <div class="col-6 text-right">{{ total(expenses) }}</div>
           <!-- 内訳 -->
           <ul class="mt-2">
             <li class="row">
@@ -44,7 +44,7 @@
         </div>
         <div class="row">
           <div class="col-6">収益</div>
-          <div class="col-6 text-right">{{ revenue.sum() }}</div>
+          <div class="col-6 text-right">{{ total(revenue) }}</div>
           <!-- 内訳 -->
           <ul class="mt-2">
             <li class="row">
@@ -70,7 +70,7 @@
         </div>
         <div class="row">
           <div class="col-6">利益</div>
-          <div class="col-6 text-right">{{ income.sum() }}</div>
+          <div class="col-6 text-right">{{ total(income) }}</div>
           <ul>
             <li class="row">
               <label class="col-6 col-form-label">当期純利益</label>
@@ -82,7 +82,7 @@
         </div>
         <div class="row">
           <div class="col-6">損失</div>
-          <div class="col-6 text-right">{{ loss.sum() }}</div>
+          <div class="col-6 text-right">{{ total(loss) }}</div>
           <ul>
             <li class="row">
               <label class="col-6 col-form-label">当期純損失</label>
@@ -125,17 +125,6 @@ export default {
         extraordinaryLoss: 0,
         // 法人税等
         corporateTax: 20,
-        /**
-         * 費用の合計値を計算して返却する
-         */
-        sum() {
-          let sum = 0
-          // eslint-disable-next-line no-unused-vars
-          for (const [key, value] of Object.entries(this)) {
-            sum += parseInt(value, 10) || 0
-          }
-          return sum
-        },
       },
       // 収益
       revenue: {
@@ -145,37 +134,14 @@ export default {
         nonOperatingIncome: 50,
         // 特別利益
         extraordinaryGain: 0,
-        /**
-         * 収益の合計値を計算して返却する
-         */
-        sum() {
-          let sum = 0
-          // eslint-disable-next-line no-unused-vars
-          for (const [key, value] of Object.entries(this)) {
-            sum += parseInt(value, 10) || 0
-          }
-          return sum
-        },
       },
       // 利益
       income: {
         netIncome: 20,
-        /**
-         * 利益の合計値を計算して返却する
-         */
-        sum() {
-          return parseInt(this.netIncome) || 0
-        },
       },
       // 損失
       loss: {
         netLoss: 0,
-        /**
-         * 損失の合計値を計算して返却する
-         */
-        sum() {
-          return parseInt(this.netLoss) || 0
-        },
       },
     }
   },
@@ -183,6 +149,17 @@ export default {
     this.fillData()
   },
   methods: {
+    /**
+     * オブジェクトの要素の合計値を計算して返却する
+     */
+    total(element) {
+      let sum = 0
+      // eslint-disable-next-line no-unused-vars
+      for (const [key, value] of Object.entries(element)) {
+        sum += parseInt(value, 10) || 0
+      }
+      return sum
+    },
     /**
      * 数値をグラフに反映する
      */
@@ -197,7 +174,7 @@ export default {
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
-            data: [this.income.sum(), null],
+            data: [this.total(this.income), null],
           },
           {
             type: 'bar',
@@ -248,7 +225,7 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '損失',
-            data: [null, this.loss.sum()],
+            data: [null, this.total(this.loss)],
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderColor: 'rgba(255,99,132,1)',
             borderWidth: 1,

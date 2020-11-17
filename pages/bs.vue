@@ -6,7 +6,7 @@
       <div class="col-md-4 my-auto">
         <div class="row">
           <div class="col-6">資産</div>
-          <div class="col-6 text-right">{{ assets.sum() }}</div>
+          <div class="col-6 text-right">{{ total(assets) }}</div>
           <!-- 内訳 -->
           <ul class="mt-2">
             <li class="row">
@@ -25,7 +25,7 @@
         </div>
         <div class="row">
           <div class="col-6">負債</div>
-          <div class="col-6 text-right">{{ liabilities.sum() }}</div>
+          <div class="col-6 text-right">{{ total(liabilities) }}</div>
           <!-- 内訳 -->
           <ul>
             <li class="row">
@@ -44,7 +44,7 @@
         </div>
         <div class="row">
           <div class="col-6">純資産</div>
-          <div class="col-6 text-right">{{ netAssets }}</div>
+          <div class="col-6 text-right">{{ parseInt(netAssets, 10) ? netAssets : 0 }}</div>
           <!-- 内訳 -->
           <ul>
             <li class="row">
@@ -78,33 +78,11 @@ export default {
       assets: {
         currentAssets: 80,
         fixedAssets: 20,
-        /**
-         * 資産の合計値を計算して返却する
-         */
-        sum() {
-          let sum = 0
-          // eslint-disable-next-line no-unused-vars
-          for (const [key, value] of Object.entries(this)) {
-            sum += parseInt(value, 10) || 0
-          }
-          return sum
-        },
       },
       // 負債
       liabilities: {
         currentLiabilities: 20,
         fixedLiabilities: 10,
-        /**
-         * 負債の合計値を計算して返却する
-         */
-        sum() {
-          let sum = 0
-          // eslint-disable-next-line no-unused-vars
-          for (const [key, value] of Object.entries(this)) {
-            sum += parseInt(value, 10) || 0
-          }
-          return sum
-        },
       },
       // 純資産
       netAssets: 70,
@@ -114,6 +92,20 @@ export default {
     this.fillData()
   },
   methods: {
+    /**
+     * オブジェクトの要素の合計値を計算して返却する
+     */
+    total(element) {
+      let sum = 0
+      // eslint-disable-next-line no-unused-vars
+      for (const [key, value] of Object.entries(element)) {
+        sum += parseInt(value, 10) || 0
+      }
+      return sum
+    },
+    /**
+     * 数値をグラフに反映する
+     */
     fillData() {
       this.datacollection = {
         labels: ['運用状況', '調達状況'],
@@ -169,3 +161,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+input:invalid {
+  border: solid 1px red;
+}
+</style>
