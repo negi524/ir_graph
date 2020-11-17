@@ -2,8 +2,8 @@
   <div class="container">
     <h2 class="mt-5">貸借対照表（B/S）</h2>
     <div class="row mt-4">
-      <balance-sheet class="col-8" :chart-data="datacollection" />
-      <div class="col-4 my-auto">
+      <balance-sheet class="col-md-8" :chart-data="datacollection" />
+      <div class="col-md-4 my-auto">
         <div class="row">
           <div class="col-6">資産</div>
           <div class="col-6 text-right">{{ assets.sum() }}</div>
