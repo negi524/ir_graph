@@ -6,18 +6,11 @@
       <profit-and-loss
         ref="pl"
         class="col-md-8"
-        :cost-of-goods-sold="expenses.cogs"
-        :sga="expenses.sga"
-        :non-operating-expense="expenses.nonOperatingExpense"
-        :extraordinary-loss="expenses.extraordinaryLoss"
-        :corporate-tax="expenses.corporateTax"
-        :sales="revenue.sales"
-        :non-operating-income="revenue.nonOperatingIncome"
-        :extraordinary-gain="revenue.extraordinaryGain"
+        :expenses="expenses"
+        :revenue="revenue"
         :net-income="total(income)"
         :net-loss="total(loss)"
       />
-      <!-- グラフ -->
       <div class="col-md-4 my-auto">
         <div class="row">
           <div class="col-6">費用</div>
@@ -27,31 +20,31 @@
             <li class="row">
               <label class="col-6 col-form-label">売上原価</label>
               <div class="col-6">
-                <b-form-input v-model="expenses.cogs" type="number" step="1" min="0" />
+                <b-form-input v-model.number="expenses.cogs" type="number" step="1" min="0" />
               </div>
             </li>
             <li class="row">
               <label class="col-6 col-form-label">販管費</label>
               <div class="col-6">
-                <b-form-input v-model="expenses.sga" type="number" step="1" min="0" />
+                <b-form-input v-model.number="expenses.sga" type="number" step="1" min="0" />
               </div>
             </li>
             <li class="row">
               <label class="col-6 col-form-label">営業外費用</label>
               <div class="col-6">
-                <b-form-input v-model="expenses.nonOperatingExpense" type="number" step="1" min="0" />
+                <b-form-input v-model.number="expenses.nonOperatingExpense" type="number" step="1" min="0" />
               </div>
             </li>
             <li class="row">
               <label class="col-6 col-form-label">特別損失</label>
               <div class="col-6">
-                <b-form-input v-model="expenses.extraordinaryLoss" type="number" step="1" min="0" />
+                <b-form-input v-model.number="expenses.extraordinaryLoss" type="number" step="1" min="0" />
               </div>
             </li>
             <li class="row">
               <label class="col-6 col-form-label">法人税等</label>
               <div class="col-6">
-                <b-form-input v-model="expenses.corporateTax" type="number" step="1" min="0" />
+                <b-form-input v-model.number="expenses.corporateTax" type="number" step="1" min="0" />
               </div>
             </li>
           </ul>
@@ -65,19 +58,19 @@
             <li class="row">
               <label class="col-6 col-form-label">売上高</label>
               <div class="col-6">
-                <b-form-input v-model="revenue.sales" type="number" step="1" min="0" />
+                <b-form-input v-model.number="revenue.sales" type="number" step="1" min="0" />
               </div>
             </li>
             <li class="row">
               <label class="col-6 col-form-label">営業外収益</label>
               <div class="col-6">
-                <b-form-input v-model="revenue.nonOperatingIncome" type="number" step="1" min="0" />
+                <b-form-input v-model.number="revenue.nonOperatingIncome" type="number" step="1" min="0" />
               </div>
             </li>
             <li class="row">
               <label class="col-6 col-form-label">特別利益</label>
               <div class="col-6">
-                <b-form-input v-model="revenue.extraordinaryGain" type="number" step="1" min="0" />
+                <b-form-input v-model.number="revenue.extraordinaryGain" type="number" step="1" min="0" />
               </div>
             </li>
           </ul>
@@ -90,7 +83,7 @@
             <li class="row">
               <label class="col-6 col-form-label">当期純利益</label>
               <div class="col-6">
-                <b-form-input v-model="income.netIncome" type="number" step="1" min="0" />
+                <b-form-input v-model.number="income.netIncome" type="number" step="1" min="0" />
               </div>
             </li>
           </ul>
@@ -102,7 +95,7 @@
             <li class="row">
               <label class="col-6 col-form-label">当期純損失</label>
               <div class="col-6">
-                <b-form-input v-model="loss.netLoss" type="number" step="1" min="0" />
+                <b-form-input v-model.number="loss.netLoss" type="number" step="1" min="0" />
               </div>
             </li>
           </ul>
@@ -166,7 +159,7 @@ export default {
       let sum = 0
       // eslint-disable-next-line no-unused-vars
       for (const [key, value] of Object.entries(element)) {
-        sum += parseInt(value, 10) || 0
+        sum += Number(value)
       }
       return sum
     },

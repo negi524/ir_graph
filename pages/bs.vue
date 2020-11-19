@@ -106,7 +106,7 @@ export default {
       let sum = 0
       // eslint-disable-next-line no-unused-vars
       for (const [key, value] of Object.entries(element)) {
-        sum += parseInt(value, 10) || 0
+        sum += Number(value)
       }
       return sum
     },

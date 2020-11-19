@@ -6,54 +6,41 @@ export default {
   extends: Bar,
   mixins: [reactiveData],
   props: {
-    // 売上原価
-    costOfGoodsSold: {
-      type: Number,
+    // 費用
+    expenses: {
+      type: Object,
       required: true,
+      default: () => ({
+        // 売上原価
+        cogs: 10,
+        // 販管費(Salling, General, Administration)
+        sga: 20,
+        // 営業外費用
+        nonOperatingExpense: 30,
+        // 特別損失
+        extraordinaryLoss: 0,
+        // 法人税等
+        corporateTax: 20,
+      }),
     },
-    // 販管費(Salling, General, Administration)
-    sga: {
-      type: Number,
+    // 収益
+    revenue: {
+      type: Object,
       required: true,
+      default: () => ({
+        // 売上高
+        sales: 50,
+        // 営業外収益
+        nonOperatingIncome: 50,
+        // 特別利益
+        extraordinaryGain: 0,
+      }),
     },
-    // 営業外費用
-    nonOperatingExpense: {
-      type: Number,
-      required: true,
-    },
-    // 特別損失
-    extraordinaryLoss: {
-      type: Number,
-      required: true,
-    },
-    // 法人税等
-    corporateTax: {
-      type: Number,
-      required: true,
-    },
-
-    // 売上高
-    sales: {
-      type: Number,
-      required: true,
-    },
-    // 営業外収益
-    nonOperatingIncome: {
-      type: Number,
-      required: true,
-    },
-    // 特別利益
-    extraordinaryGain: {
-      type: Number,
-      required: true,
-    },
-
     // 利益
     netIncome: {
       type: Number,
       required: true,
     },
-
     // 損失
     netLoss: {
       type: Number,
@@ -111,7 +98,7 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '法人税等',
-            data: [this.corporateTax, null],
+            data: [this.expenses.corporateTax, null],
             backgroundColor: 'rgba(255, 159, 64, 0.2)',
             borderColor: 'rgba(255, 159, 64, 1)',
             borderWidth: 1,
@@ -120,7 +107,7 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '特別損失',
-            data: [this.extraordinaryLoss, null],
+            data: [this.expenses.extraordinaryLoss, null],
             backgroundColor: 'rgba(255, 159, 64, 0.2)',
             borderColor: 'rgba(255, 159, 64, 1)',
             borderWidth: 1,
@@ -129,7 +116,7 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '営業外費用',
-            data: [this.nonOperatingExpense, null],
+            data: [this.expenses.nonOperatingExpense, null],
             backgroundColor: 'rgba(255, 159, 64, 0.2)',
             borderColor: 'rgba(255, 159, 64, 1)',
             borderWidth: 1,
@@ -138,7 +125,7 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '販管費',
-            data: [this.sga, null],
+            data: [this.expenses.sga, null],
             backgroundColor: 'rgba(255, 159, 64, 0.2)',
             borderColor: 'rgba(255, 159, 64, 1)',
             borderWidth: 1,
@@ -147,7 +134,7 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '売上原価',
-            data: [this.costOfGoodsSold, null],
+            data: [this.expenses.cogs, null],
             backgroundColor: 'rgba(255, 159, 64, 0.2)',
             borderColor: 'rgba(255, 159, 64, 1)',
             borderWidth: 1,
@@ -165,7 +152,7 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '特別利益',
-            data: [null, this.extraordinaryGain],
+            data: [null, this.revenue.extraordinaryGain],
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
@@ -174,7 +161,7 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '営業外収益',
-            data: [null, this.nonOperatingIncome],
+            data: [null, this.revenue.nonOperatingIncome],
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
@@ -183,7 +170,7 @@ export default {
             type: 'bar',
             barPercentage: 1.2,
             label: '売上高',
-            data: [null, this.sales],
+            data: [null, this.revenue.sales],
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
