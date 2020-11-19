@@ -67,7 +67,6 @@
           </ul>
         </div>
         <div class="row mt-3">
-          <!-- <b-button class="mx-auto" variant="outline-primary" @click="fillData()">反映</b-button> -->
           <b-button class="mx-auto" variant="outline-primary" @click="$refs.bs.fillData()">反映</b-button>
         </div>
       </div>
