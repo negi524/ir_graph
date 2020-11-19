@@ -2,7 +2,22 @@
   <div class="container">
     <h2 class="mt-5">損益計算書（P/L）</h2>
     <div class="row mt-4">
-      <profit-and-loss class="col-md-8" :chart-data="datacollection" />
+      <!-- グラフ -->
+      <profit-and-loss
+        ref="pl"
+        class="col-md-8"
+        :cost-of-goods-sold="expenses.cogs"
+        :sga="expenses.sga"
+        :non-operating-expense="expenses.nonOperatingExpense"
+        :extraordinary-loss="expenses.extraordinaryLoss"
+        :corporate-tax="expenses.corporateTax"
+        :sales="revenue.sales"
+        :non-operating-income="revenue.nonOperatingIncome"
+        :extraordinary-gain="revenue.extraordinaryGain"
+        :net-income="total(income)"
+        :net-loss="total(loss)"
+      />
+      <!-- グラフ -->
       <div class="col-md-4 my-auto">
         <div class="row">
           <div class="col-6">費用</div>
@@ -93,7 +108,7 @@
           </ul>
         </div>
         <div class="row mt-3">
-          <b-button class="mx-auto" variant="outline-primary" @click="fillData()">
+          <b-button class="mx-auto" variant="outline-primary" @click="$refs.pl.fillData()">
             反映
           </b-button>
         </div>
@@ -111,8 +126,6 @@ export default {
   },
   data() {
     return {
-      // チャートを構成するデータセット一覧
-      datacollection: null,
       // 費用
       expenses: {
         // 売上原価
@@ -145,9 +158,6 @@ export default {
       },
     }
   },
-  mounted() {
-    this.fillData()
-  },
   methods: {
     /**
      * オブジェクトの要素の合計値を計算して返却する
@@ -159,106 +169,6 @@ export default {
         sum += parseInt(value, 10) || 0
       }
       return sum
-    },
-    /**
-     * 数値をグラフに反映する
-     */
-    fillData() {
-      this.datacollection = {
-        labels: ['借方', '貸方'],
-        datasets: [
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '利益',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1,
-            data: [this.total(this.income), null],
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '法人税等',
-            data: [this.expenses.corporateTax, null],
-            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-            borderColor: 'rgba(255, 159, 64, 1)',
-            borderWidth: 1,
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '特別損失',
-            data: [this.expenses.extraordinaryLoss, null],
-            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-            borderColor: 'rgba(255, 159, 64, 1)',
-            borderWidth: 1,
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '営業外費用',
-            data: [this.expenses.nonOperatingExpense, null],
-            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-            borderColor: 'rgba(255, 159, 64, 1)',
-            borderWidth: 1,
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '販管費',
-            data: [this.expenses.sga, null],
-            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-            borderColor: 'rgba(255, 159, 64, 1)',
-            borderWidth: 1,
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '売上原価',
-            data: [this.expenses.cogs, null],
-            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-            borderColor: 'rgba(255, 159, 64, 1)',
-            borderWidth: 1,
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '損失',
-            data: [null, this.total(this.loss)],
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255,99,132,1)',
-            borderWidth: 1,
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '特別利益',
-            data: [null, this.revenue.extraordinaryGain],
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1,
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '営業外収益',
-            data: [null, this.revenue.nonOperatingIncome],
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1,
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '売上高',
-            data: [null, this.revenue.sales],
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1,
-          },
-        ],
-      }
     },
   },
 }
