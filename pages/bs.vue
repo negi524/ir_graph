@@ -2,6 +2,7 @@
   <div class="container">
     <h2 class="mt-5">貸借対照表（B/S）</h2>
     <div class="row mt-4">
+      <!-- グラフ -->
       <balance-sheet
         ref="bs"
         class="col-md-8"
@@ -67,7 +68,7 @@
           </ul>
         </div>
         <div class="row mt-3">
-          <b-button class="mx-auto" variant="outline-primary" @click="$refs.bs.fillData()">反映</b-button>
+          <b-button class="mx-auto" variant="outline-primary" @click="updateChart()">反映</b-button>
         </div>
       </div>
     </div>
@@ -83,6 +84,8 @@ export default {
   },
   data() {
     return {
+      // ローカルストレージに保存するキー名
+      storageKeyName: 'bsData',
       // 資産
       assets: {
         currentAssets: 80,
@@ -97,6 +100,16 @@ export default {
       netAssets: 70,
     }
   },
+  created() {
+    // ローカルストレージにデータが存在すれば取り出してセットする
+    const localBsData = localStorage.getItem(this.storageKeyName)
+    if (localBsData) {
+      const data = JSON.parse(localBsData)
+      this.assets = data.assets
+      this.liabilities = data.liabilities
+      this.netAssets = data.netAssets
+    }
+  },
   methods: {
     /**
      * オブジェクトの要素の合計値を計算して返却する
@@ -108,6 +121,19 @@ export default {
         sum += Number(value)
       }
       return sum
+    },
+    /**
+     * チャートデータの反映を行う
+     */
+    updateChart() {
+      // 子コンポーネントのデータ更新メソッドを呼び出し
+      this.$refs.bs.fillData()
+      const temp = {
+        assets: this.assets,
+        liabilities: this.liabilities,
+        netAssets: this.netAssets,
+      }
+      localStorage.setItem(this.storageKeyName, JSON.stringify(temp))
     },
   },
 }
