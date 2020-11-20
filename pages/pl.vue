@@ -101,7 +101,7 @@
           </ul>
         </div>
         <div class="row mt-3">
-          <b-button class="mx-auto" variant="outline-primary" @click="$refs.pl.fillData()">
+          <b-button class="mx-auto" variant="outline-primary" @click="updateChart()">
             反映
           </b-button>
         </div>
@@ -119,6 +119,8 @@ export default {
   },
   data() {
     return {
+      // ローカルストレージに保存するキー名
+      storageKeyName: 'plData',
       // 費用
       expenses: {
         // 売上原価
@@ -151,6 +153,17 @@ export default {
       },
     }
   },
+  created() {
+    // ローカルストレージにデータが存在すれば取り出してセットする
+    const localPlData = localStorage.getItem(this.storageKeyName)
+    if (localPlData) {
+      const data = JSON.parse(localPlData)
+      this.expenses = data.expenses
+      this.revenue = data.revenue
+      this.income = data.income
+      this.loss = data.loss
+    }
+  },
   methods: {
     /**
      * オブジェクトの要素の合計値を計算して返却する
@@ -162,6 +175,21 @@ export default {
         sum += Number(value)
       }
       return sum
+    },
+    /**
+     * チャートデータの反映を行う
+     */
+    updateChart() {
+      // 子コンポーネントのデータ更新メソッドを呼び出し
+      this.$refs.pl.fillData()
+      // ローカルストレージにデータを保存
+      const temp = {
+        expenses: this.expenses,
+        revenue: this.revenue,
+        income: this.income,
+        loss: this.loss,
+      }
+      localStorage.setItem(this.storageKeyName, JSON.stringify(temp))
     },
   },
 }
