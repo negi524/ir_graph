@@ -2,7 +2,15 @@
   <div class="container">
     <h2 class="mt-5">損益計算書（P/L）</h2>
     <div class="row mt-4">
-      <profit-and-loss class="col-md-8" :chart-data="datacollection" />
+      <!-- グラフ -->
+      <profit-and-loss
+        ref="pl"
+        class="col-md-8"
+        :expenses="expenses"
+        :revenue="revenue"
+        :net-income="total(income)"
+        :net-loss="total(loss)"
+      />
       <div class="col-md-4 my-auto">
         <div class="row">
           <div class="col-6">費用</div>
@@ -12,31 +20,31 @@
             <li class="row">
               <label class="col-6 col-form-label">売上原価</label>
               <div class="col-6">
-                <b-form-input v-model="expenses.cogs" type="number" step="1" min="0" />
+                <b-form-input v-model.number="expenses.cogs" type="number" step="1" min="0" />
               </div>
             </li>
             <li class="row">
               <label class="col-6 col-form-label">販管費</label>
               <div class="col-6">
-                <b-form-input v-model="expenses.sga" type="number" step="1" min="0" />
+                <b-form-input v-model.number="expenses.sga" type="number" step="1" min="0" />
               </div>
             </li>
             <li class="row">
               <label class="col-6 col-form-label">営業外費用</label>
               <div class="col-6">
-                <b-form-input v-model="expenses.nonOperatingExpense" type="number" step="1" min="0" />
+                <b-form-input v-model.number="expenses.nonOperatingExpense" type="number" step="1" min="0" />
               </div>
             </li>
             <li class="row">
               <label class="col-6 col-form-label">特別損失</label>
               <div class="col-6">
-                <b-form-input v-model="expenses.extraordinaryLoss" type="number" step="1" min="0" />
+                <b-form-input v-model.number="expenses.extraordinaryLoss" type="number" step="1" min="0" />
               </div>
             </li>
             <li class="row">
               <label class="col-6 col-form-label">法人税等</label>
               <div class="col-6">
-                <b-form-input v-model="expenses.corporateTax" type="number" step="1" min="0" />
+                <b-form-input v-model.number="expenses.corporateTax" type="number" step="1" min="0" />
               </div>
             </li>
           </ul>
@@ -50,19 +58,19 @@
             <li class="row">
               <label class="col-6 col-form-label">売上高</label>
               <div class="col-6">
-                <b-form-input v-model="revenue.sales" type="number" step="1" min="0" />
+                <b-form-input v-model.number="revenue.sales" type="number" step="1" min="0" />
               </div>
             </li>
             <li class="row">
               <label class="col-6 col-form-label">営業外収益</label>
               <div class="col-6">
-                <b-form-input v-model="revenue.nonOperatingIncome" type="number" step="1" min="0" />
+                <b-form-input v-model.number="revenue.nonOperatingIncome" type="number" step="1" min="0" />
               </div>
             </li>
             <li class="row">
               <label class="col-6 col-form-label">特別利益</label>
               <div class="col-6">
-                <b-form-input v-model="revenue.extraordinaryGain" type="number" step="1" min="0" />
+                <b-form-input v-model.number="revenue.extraordinaryGain" type="number" step="1" min="0" />
               </div>
             </li>
           </ul>
@@ -75,7 +83,7 @@
             <li class="row">
               <label class="col-6 col-form-label">当期純利益</label>
               <div class="col-6">
-                <b-form-input v-model="income.netIncome" type="number" step="1" min="0" />
+                <b-form-input v-model.number="income.netIncome" type="number" step="1" min="0" />
               </div>
             </li>
           </ul>
@@ -87,13 +95,13 @@
             <li class="row">
               <label class="col-6 col-form-label">当期純損失</label>
               <div class="col-6">
-                <b-form-input v-model="loss.netLoss" type="number" step="1" min="0" />
+                <b-form-input v-model.number="loss.netLoss" type="number" step="1" min="0" />
               </div>
             </li>
           </ul>
         </div>
         <div class="row mt-3">
-          <b-button class="mx-auto" variant="outline-primary" @click="fillData()">
+          <b-button class="mx-auto" variant="outline-primary" @click="updateChart()">
             反映
           </b-button>
         </div>
@@ -111,8 +119,8 @@ export default {
   },
   data() {
     return {
-      // チャートを構成するデータセット一覧
-      datacollection: null,
+      // ローカルストレージに保存するキー名
+      storageKeyName: 'plData',
       // 費用
       expenses: {
         // 売上原価
@@ -145,8 +153,16 @@ export default {
       },
     }
   },
-  mounted() {
-    this.fillData()
+  created() {
+    // ローカルストレージにデータが存在すれば取り出してセットする
+    const localPlData = localStorage.getItem(this.storageKeyName)
+    if (localPlData) {
+      const data = JSON.parse(localPlData)
+      this.expenses = data.expenses
+      this.revenue = data.revenue
+      this.income = data.income
+      this.loss = data.loss
+    }
   },
   methods: {
     /**
@@ -156,109 +172,24 @@ export default {
       let sum = 0
       // eslint-disable-next-line no-unused-vars
       for (const [key, value] of Object.entries(element)) {
-        sum += parseInt(value, 10) || 0
+        sum += Number(value)
       }
       return sum
     },
     /**
-     * 数値をグラフに反映する
+     * チャートデータの反映を行う
      */
-    fillData() {
-      this.datacollection = {
-        labels: ['借方', '貸方'],
-        datasets: [
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '利益',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1,
-            data: [this.total(this.income), null],
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '法人税等',
-            data: [this.expenses.corporateTax, null],
-            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-            borderColor: 'rgba(255, 159, 64, 1)',
-            borderWidth: 1,
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '特別損失',
-            data: [this.expenses.extraordinaryLoss, null],
-            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-            borderColor: 'rgba(255, 159, 64, 1)',
-            borderWidth: 1,
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '営業外費用',
-            data: [this.expenses.nonOperatingExpense, null],
-            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-            borderColor: 'rgba(255, 159, 64, 1)',
-            borderWidth: 1,
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '販管費',
-            data: [this.expenses.sga, null],
-            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-            borderColor: 'rgba(255, 159, 64, 1)',
-            borderWidth: 1,
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '売上原価',
-            data: [this.expenses.cogs, null],
-            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-            borderColor: 'rgba(255, 159, 64, 1)',
-            borderWidth: 1,
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '損失',
-            data: [null, this.total(this.loss)],
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255,99,132,1)',
-            borderWidth: 1,
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '特別利益',
-            data: [null, this.revenue.extraordinaryGain],
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1,
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '営業外収益',
-            data: [null, this.revenue.nonOperatingIncome],
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1,
-          },
-          {
-            type: 'bar',
-            barPercentage: 1.2,
-            label: '売上高',
-            data: [null, this.revenue.sales],
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1,
-          },
-        ],
+    updateChart() {
+      // 子コンポーネントのデータ更新メソッドを呼び出し
+      this.$refs.pl.fillData()
+      // ローカルストレージにデータを保存
+      const temp = {
+        expenses: this.expenses,
+        revenue: this.revenue,
+        income: this.income,
+        loss: this.loss,
       }
+      localStorage.setItem(this.storageKeyName, JSON.stringify(temp))
     },
   },
 }
