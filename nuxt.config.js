@@ -22,6 +22,7 @@ export default {
       href: 'router.base',
     },
     title: process.env.npm_package_name || '',
+    htmlAttrs: { lang: 'ja' },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -35,10 +36,7 @@ export default {
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href:
-          process.env.DEPLOY_ENV === 'GH_PAGES'
-            ? '/ir_graph/negi.ico'
-            : '/negi.ico',
+        href: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/ir_graph/negi.ico' : '/negi.ico',
       },
     ],
   },
