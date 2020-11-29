@@ -73,17 +73,20 @@
         </div>
       </div>
     </div>
+    <global-footer />
   </div>
 </template>
 
 <script>
 import BalanceSheet from '~/components/BalanceSheet.vue'
 import GlobalHeader from '~/components/GlobalHeader.vue'
+import GlobalFooter from '~/components/GlobalFooter.vue'
 
 export default {
   components: {
     BalanceSheet,
     GlobalHeader,
+    GlobalFooter,
   },
   data() {
     return {

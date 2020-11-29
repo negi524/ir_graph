@@ -108,17 +108,20 @@
         </div>
       </div>
     </div>
+    <global-footer />
   </div>
 </template>
 
 <script>
 import ProfitAndLoss from '~/components/ProfitAndLoss.vue'
 import GlobalHeader from '~/components/GlobalHeader.vue'
+import GlobalFooter from '~/components/GlobalFooter.vue'
 
 export default {
   components: {
     ProfitAndLoss,
     GlobalHeader,
+    GlobalFooter,
   },
   data() {
     return {
