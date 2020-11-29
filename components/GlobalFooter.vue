@@ -4,6 +4,6 @@
 
 <style lang="scss" scoped>
 .footer {
-  padding-top: 48px;
+  height: 48px;
 }
 </style>
