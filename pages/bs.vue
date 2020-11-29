@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <global-header />
     <h2 class="mt-5">貸借対照表（B/S）</h2>
     <div class="row mt-4">
       <!-- グラフ -->
@@ -77,10 +78,12 @@
 
 <script>
 import BalanceSheet from '~/components/BalanceSheet.vue'
+import GlobalHeader from '~/components/GlobalHeader.vue'
 
 export default {
   components: {
     BalanceSheet,
+    GlobalHeader,
   },
   data() {
     return {

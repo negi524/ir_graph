@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <global-header />
     <h2 class="mt-5">損益計算書（P/L）</h2>
     <div class="row mt-4">
       <!-- グラフ -->
@@ -112,10 +113,12 @@
 
 <script>
 import ProfitAndLoss from '~/components/ProfitAndLoss.vue'
+import GlobalHeader from '~/components/GlobalHeader.vue'
 
 export default {
   components: {
     ProfitAndLoss,
+    GlobalHeader,
   },
   data() {
     return {
