@@ -70,6 +70,7 @@
         </div>
         <div class="row mt-3">
           <b-button class="mx-auto" variant="outline-primary" @click="updateChart()">反映</b-button>
+          <b-button class="mx-auto" variant="outline-secondary" @click="clearData()">クリア</b-button>
         </div>
       </div>
     </div>
@@ -140,6 +141,20 @@ export default {
         netAssets: this.netAssets,
       }
       localStorage.setItem(this.storageKeyName, JSON.stringify(temp))
+    },
+    /**
+     * データのクリアを行う
+     */
+    clearData() {
+      this.assets = {
+        currentAssets: 0,
+        fixedAssets: 0,
+      }
+      this.liabilities = {
+        currentLiabilities: 0,
+        fixedLiabilities: 0,
+      }
+      this.netAssets = 0
     },
   },
 }

@@ -102,9 +102,8 @@
           </ul>
         </div>
         <div class="row mt-3">
-          <b-button class="mx-auto" variant="outline-primary" @click="updateChart()">
-            反映
-          </b-button>
+          <b-button class="mx-auto" variant="outline-primary" @click="updateChart()">反映</b-button>
+          <b-button class="mx-auto" variant="outline-secondary" @click="clearData()">クリア</b-button>
         </div>
       </div>
     </div>
@@ -196,6 +195,29 @@ export default {
         loss: this.loss,
       }
       localStorage.setItem(this.storageKeyName, JSON.stringify(temp))
+    },
+    /**
+     * データのクリアを行う
+     */
+    clearData() {
+      this.expenses = {
+        cogs: 0,
+        sga: 0,
+        nonOperatingExpense: 0,
+        extraordinaryLoss: 0,
+        corporateTax: 0,
+      }
+      this.revenue = {
+        sales: 0,
+        nonOperatingIncome: 0,
+        extraordinaryGain: 0,
+      }
+      this.income = {
+        netIncome: 0,
+      }
+      this.loss = {
+        netLoss: 0,
+      }
     },
   },
 }
