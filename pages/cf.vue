@@ -35,9 +35,9 @@ export default {
       // 営業活動
       operatingActivities: 40,
       // 投資活動
-      investmentActivities: 60,
+      investmentActivities: -170,
       // 財務活動
-      financingActivities: 30,
+      financingActivities: 40,
       // 期末現金
     }
   },
