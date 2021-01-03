@@ -12,13 +12,23 @@
         :investment-activities="investmentActivities"
         :financing-activities="financingActivities"
       />
-      <div class="col-md-4 my-auto">
-        <ul>
-          <li>期首現金</li>
-          <li>営業活動</li>
-          <li>投資活動</li>
-          <li>財務活動</li>
-        </ul>
+      <div class="col-md-4 my-auto cs-input">
+        <div class="cs-input__item">
+          <label class="cs-input__label">期首現金</label>
+          <b-form-input v-model.number="beginningCache" class="cs-input__form" type="number" step="1" />
+        </div>
+        <div class="cs-input__item">
+          <label class="cs-input__label">営業活動</label>
+          <b-form-input v-model="operatingActivities" class="cs-input__form" type="number" step="1" />
+        </div>
+        <div class="cs-input__item">
+          <label class="cs-input__label">投資活動</label>
+          <b-form-input v-model="investmentActivities" class="cs-input__form" type="number" step="1" />
+        </div>
+        <div class="cs-input__item">
+          <label class="cs-input__label">財務活動</label>
+          <b-form-input v-model="financingActivities" class="cs-input__form" type="number" step="1" />
+        </div>
       </div>
     </div>
     <global-footer />
