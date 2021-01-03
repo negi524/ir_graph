@@ -227,6 +227,7 @@ export default {
             data: [this.beginningCache, null, null, null, null],
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
           },
           {
             label: '営業活動の非表示要素',
@@ -242,6 +243,7 @@ export default {
             backgroundColor:
               this.operatingActivities > 0 ? this.plusColor.background : this.minusColor.background,
             borderColor: this.operatingActivities > 0 ? this.plusColor.border : this.minusColor.border,
+            borderWidth: 1,
           },
           {
             // 営業活動の負部分
@@ -250,6 +252,7 @@ export default {
             backgroundColor:
               this.operatingActivities > 0 ? this.plusColor.background : this.minusColor.background,
             borderColor: this.operatingActivities > 0 ? this.plusColor.border : this.minusColor.border,
+            borderWidth: 1,
           },
           {
             label: '投資活動の非表示要素',
@@ -265,6 +268,7 @@ export default {
             backgroundColor:
               this.investmentActivities > 0 ? this.plusColor.background : this.minusColor.background,
             borderColor: this.investmentActivities > 0 ? this.plusColor.border : this.minusColor.border,
+            borderWidth: 1,
           },
           {
             // 投資活動の負部分
@@ -273,6 +277,7 @@ export default {
             backgroundColor:
               this.investmentActivities > 0 ? this.plusColor.background : this.minusColor.background,
             borderColor: this.investmentActivities > 0 ? this.plusColor.border : this.minusColor.border,
+            borderWidth: 1,
           },
           {
             label: '財務活動の非表示要素',
@@ -288,6 +293,7 @@ export default {
             backgroundColor:
               this.financingActivities > 0 ? this.plusColor.background : this.minusColor.background,
             borderColor: this.financingActivities > 0 ? this.plusColor.border : this.minusColor.border,
+            borderWidth: 1,
           },
           {
             // 財務活動の負部分
@@ -296,12 +302,14 @@ export default {
             backgroundColor:
               this.financingActivities > 0 ? this.plusColor.background : this.minusColor.background,
             borderColor: this.financingActivities > 0 ? this.plusColor.border : this.minusColor.border,
+            borderWidth: 1,
           },
           {
             label: '期末現金',
             data: [null, null, null, null, this.endCache],
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
           },
         ],
       }
