@@ -39,12 +39,7 @@
             <li class="row">
               <label class="col-6 col-form-label">流動負債</label>
               <div class="col-6">
-                <b-form-input
-                  v-model.number="liabilities.currentLiabilities"
-                  type="number"
-                  step="1"
-                  min="0"
-                />
+                <b-form-input v-model.number="liabilities.currentLiabilities" type="number" step="1" min="0" />
               </div>
             </li>
             <li class="row">
