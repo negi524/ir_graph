@@ -29,6 +29,10 @@
           <label class="cs-input__label">財務活動</label>
           <b-form-input v-model="financingActivities" class="cs-input__form" type="number" step="1" />
         </div>
+        <div class="row mt-3">
+          <b-button class="mx-auto" variant="outline-primary" @click="updateChart()">反映</b-button>
+          <b-button class="mx-auto" variant="outline-secondary" @click="clearData()">クリア</b-button>
+        </div>
       </div>
     </div>
     <global-footer />
@@ -58,6 +62,13 @@ export default {
       financingActivities: 40,
       // 期末現金
     }
+  },
+  methods: {
+    /**
+     * チャートデータの反映を行う
+     */
+    updateChart() {},
+    clearData() {},
   },
 }
 </script>
