@@ -8,6 +8,7 @@
       <li>投資活動</li>
       <li>財務活動</li>
     </ul>
+    <cache-flow />
     <global-footer />
   </div>
 </template>
@@ -15,11 +16,13 @@
 <script>
 import GlobalHeader from '~/components/GlobalHeader.vue'
 import GlobalFooter from '~/components/GlobalFooter.vue'
+import CacheFlow from '~/components/CacheFlow.vue'
 
 export default {
   components: {
     GlobalHeader,
     GlobalFooter,
+    CacheFlow,
   },
   data() {
     return {
