@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <global-header />
     <h2 class="mt-5">キャッシュフロー計算書</h2>
     <p>工事中…</p>
     <ul>
@@ -7,11 +8,19 @@
       <li>投資活動</li>
       <li>財務活動</li>
     </ul>
+    <global-footer />
   </div>
 </template>
 
 <script>
+import GlobalHeader from '~/components/GlobalHeader.vue'
+import GlobalFooter from '~/components/GlobalFooter.vue'
+
 export default {
+  components: {
+    GlobalHeader,
+    GlobalFooter,
+  },
   data() {
     return {
       // 期首現金
