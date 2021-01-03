@@ -30,21 +30,10 @@ export default {
       required: true,
       default: 30,
     },
-  },
-  data() {
-    return {
-      // プラスの場合の色定義
-      plusColor: {
-        background: 'rgba(54, 162, 235, 0.2)',
-        border: 'rgba(54, 162, 235, 1)',
-      },
-      // マイナスの場合の色定義
-      minusColor: {
-        background: 'rgba(255, 99, 132, 0.2)',
-        border: 'rgba(255,99,132,1)',
-      },
-      chartData: null,
-      options: {
+    options: {
+      type: Object,
+      required: false,
+      default: () => ({
         responsibe: true,
         maintainAspectRaito: false,
         // 凡例を非表示にする
@@ -63,7 +52,22 @@ export default {
             },
           ],
         },
+      }),
+    },
+  },
+  data() {
+    return {
+      // プラスの場合の色定義
+      plusColor: {
+        background: 'rgba(54, 162, 235, 0.2)',
+        border: 'rgba(54, 162, 235, 1)',
       },
+      // マイナスの場合の色定義
+      minusColor: {
+        background: 'rgba(255, 99, 132, 0.2)',
+        border: 'rgba(255,99,132,1)',
+      },
+      chartData: null,
     }
   },
   computed: {
