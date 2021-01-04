@@ -75,32 +75,48 @@ export default {
      * 営業活動のグラフ描画に必要な隠しグラフ
      */
     hiddenOperatingAmount() {
-      let result = this.beginningCache
-      // 営業活動マイナスの場合、合計値から引く
-      if (this.operatingActivities < 0) {
-        result += this.operatingActivities
-      }
+      const total = this.beginningCache + this.operatingActivities
 
-      // 0以下の場合、グラフの0を跨ぐので隠しグラフ不要
-      return result > 0 ? result : null
+      if (this.beginningCache * total < 0) {
+        // 0跨ぎの場合隠しグラフ不要
+        return null
+      } else if (this.beginningCache * this.operatingActivities > 0) {
+        // 加算前と符号が同じ場合は期首現金の結果を返す
+        return this.beginningCache
+      } else {
+        // 加算前と符号が異なる場合は営業活動の増減を考慮した値を返却する
+        return total
+      }
     },
     /**
      * グラフ描画用の営業活動キャッシュフローを返却する
      */
     displayOperatingActivities() {
-      // 営業活動キャッシュフロー加算時の合計
-      const total = this.beginningCache + this.operatingActivities
       const result = {
         plus: 0, // 正の表示部
         minus: 0, // 負の表示部
       }
-      if (total >= 0) {
-        result.plus = Math.abs(this.operatingActivities)
-      } else {
-        result.minus = total
-        result.plus = Math.abs(this.operatingActivities) + total
-      }
 
+      // 営業活動キャッシュフロー加算時の合計
+      const total = this.beginningCache + this.operatingActivities
+
+      // 0を跨いでプラスになる場合
+      const minusToPlus = this.beginningCache <= 0 && total > 0
+      // 0を跨いでマイナスになる場合
+      const plusToMinus = this.beginningCache > 0 && total <= 0
+      // 常にマイナスになる場合
+      const minusToMinus = this.beginningCache < 0 && total < 0
+      if (minusToPlus) {
+        result.plus = total
+        result.minus = this.beginningCache
+      } else if (plusToMinus) {
+        result.plus = this.beginningCache
+        result.minus = total
+      } else if (minusToMinus) {
+        result.minus = Math.abs(this.operatingActivities) * -1
+      } else {
+        result.plus = Math.abs(this.operatingActivities)
+      }
       return result
     },
     /**
@@ -118,7 +134,7 @@ export default {
         return beforeTotal
       } else {
         // 加算前と符号が異なる場合は投資活動の増減を考慮した値を返す
-        return beforeTotal + this.investmentActivities
+        return afterTotal
       }
     },
     /**
@@ -170,7 +186,7 @@ export default {
         return beforeTotal
       } else {
         // 加算前と符号が異なる場合は投資活動の増減を考慮した値を返す
-        return beforeTotal + this.financingActivities
+        return afterTotal
       }
     },
     /**
@@ -205,7 +221,6 @@ export default {
       } else {
         result.plus = Math.abs(this.financingActivities)
       }
-
       return result
     },
     /**
