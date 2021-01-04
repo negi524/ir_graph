@@ -7,10 +7,10 @@
       <cache-flow
         ref="cf"
         class="col-md-8"
-        :beginning-cache="beginningCache ? beginningCache : 0"
-        :operating-activities="operatingActivities ? operatingActivities : 0"
-        :investment-activities="investmentActivities ? investmentActivities : 0"
-        :financing-activities="financingActivities ? financingActivities : 0"
+        :beginning-cache="Number(beginningCache)"
+        :operating-activities="Number(operatingActivities)"
+        :investment-activities="Number(investmentActivities)"
+        :financing-activities="Number(financingActivities)"
       />
       <div class="col-md-4 my-auto cs-input">
         <div class="cs-input__item">
