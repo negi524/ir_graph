@@ -149,7 +149,7 @@ export default {
         result.plus = beforeTotal
         result.minus = afterTotal
       } else if (minusToMinus) {
-        result.minus = this.investmentActivities
+        result.minus = Math.abs(this.investmentActivities) * -1
       } else {
         result.plus = Math.abs(this.investmentActivities)
       }
@@ -201,7 +201,7 @@ export default {
         result.plus = beforeTotal
         result.minus = afterTotal
       } else if (minusToMinus) {
-        result.minus = this.financingActivities
+        result.minus = Math.abs(this.financingActivities) * -1
       } else {
         result.plus = Math.abs(this.financingActivities)
       }
