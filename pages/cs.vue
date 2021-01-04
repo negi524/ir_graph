@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <global-header />
-    <h2 class="mt-5">キャッシュフロー計算書</h2>
+    <h2 class="mt-5">キャッシュフロー計算書（C/S）</h2>
     <div class="row mt-4">
       <!-- グラフ -->
       <cache-flow
@@ -29,11 +29,11 @@
           <label class="cs-input__label">財務活動</label>
           <b-form-input v-model.number="financingActivities" class="cs-input__form" type="number" step="1" />
         </div>
-        <div class="cs-input__result">
+        <div class="cs-input__item">
           <div>期末現金</div>
           <div>{{ total }}</div>
         </div>
-        <div class="row mt-3">
+        <div class="row mt-4">
           <b-button class="mx-auto" variant="outline-primary" @click="updateChart()">反映</b-button>
           <b-button class="mx-auto" variant="outline-secondary" @click="clearData()">クリア</b-button>
         </div>
@@ -129,9 +129,30 @@ input:invalid {
 
 // PC
 @media (min-width: 897px) {
+  .cs-input {
+    &__item {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+    }
+    &__label {
+      width: 120px;
+      margin: auto 0;
+    }
+  }
 }
 
 // SP
 @media (max-width: 896px) {
+  .cs-input {
+    &__item {
+      display: flex;
+      justify-content: space-between;
+    }
+    &__label {
+      width: 120px;
+      margin: auto 0;
+    }
+  }
 }
 </style>

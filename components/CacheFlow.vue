@@ -34,7 +34,7 @@ export default {
       type: Object,
       required: false,
       default: () => ({
-        responsibe: true,
+        responsive: true,
         maintainAspectRaito: false,
         // 凡例を非表示にする
         legend: {
