@@ -6,7 +6,7 @@
       <!-- グラフ -->
       <cache-flow
         ref="cf"
-        class="col-md-8"
+        class="cache-flow-graph col-md-8"
         :beginning-cache="Number(beginningCache)"
         :operating-activities="Number(operatingActivities)"
         :investment-activities="Number(investmentActivities)"
@@ -139,6 +139,10 @@ input:invalid {
       width: 120px;
       margin: auto 0;
     }
+  }
+  // キャッシュフローのグラフの最大サイズを制限する
+  .cache-flow-graph {
+    max-width: 610px;
   }
 }
 
