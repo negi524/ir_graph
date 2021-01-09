@@ -2,7 +2,8 @@
   <div class="container">
     <global-header />
     <h2 class="mt-5">貸借対照表（B/S）</h2>
-    <div class="row mt-4">
+    <corp-detail class="mt-5" />
+    <div class="row mt-5">
       <!-- グラフ -->
       <balance-sheet
         ref="bs"
@@ -82,12 +83,14 @@
 import BalanceSheet from '~/components/BalanceSheet.vue'
 import GlobalHeader from '~/components/GlobalHeader.vue'
 import GlobalFooter from '~/components/GlobalFooter.vue'
+import CorpDetail from '~/components/CorpDetail.vue'
 
 export default {
   components: {
     BalanceSheet,
     GlobalHeader,
     GlobalFooter,
+    CorpDetail,
   },
   data() {
     return {
