@@ -2,21 +2,8 @@
   <div class="container">
     <global-header />
     <h2 class="mt-5">損益計算書（P/L）</h2>
-    <table v-if="hasQueryParams" class="table table-bordered">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">企業名</th>
-          <th scope="col">決算時期</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{ corpName }}</td>
-          <td>{{ quarter }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="row mt-4">
+    <corp-detail />
+    <div class="row mt-5">
       <!-- グラフ -->
       <profit-and-loss
         ref="pl"
@@ -129,12 +116,14 @@
 import ProfitAndLoss from '~/components/ProfitAndLoss.vue'
 import GlobalHeader from '~/components/GlobalHeader.vue'
 import GlobalFooter from '~/components/GlobalFooter.vue'
+import CorpDetail from '~/components/CorpDetail.vue'
 
 export default {
   components: {
     ProfitAndLoss,
     GlobalHeader,
     GlobalFooter,
+    CorpDetail,
   },
   data() {
     return {
@@ -171,38 +160,6 @@ export default {
         netLoss: 0,
       },
     }
-  },
-  computed: {
-    /**
-     * リクエストパラメータに設定された企業名を取得する
-     */
-    corpName() {
-      if (this.$route.query) {
-        return this.$route.query.name ? this.$route.query.name : null
-      } else {
-        return null
-      }
-    },
-    /**
-     * リクエストパラメータに設定された時期を取得する
-     */
-    quarter() {
-      if (this.$route.query) {
-        return this.$route.query.quarter ? this.$route.query.quarter : null
-      } else {
-        return null
-      }
-    },
-    /**
-     * クエリパラメータがあればtrue
-     */
-    hasQueryParams() {
-      if (!this.$route.query) {
-        return false
-      } else {
-        return this.$route.query.name || this.$route.query.quarter
-      }
-    },
   },
   created() {
     // ローカルストレージにデータが存在すれば取り出してセットする
