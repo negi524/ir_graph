@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-5">
+  <div>
     <table v-if="hasAnyQuery" class="table table-bordered mt-5">
       <thead class="thead-light">
         <tr>

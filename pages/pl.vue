@@ -2,7 +2,7 @@
   <div class="container">
     <global-header />
     <h2 class="mt-5">損益計算書（P/L）</h2>
-    <corp-detail />
+    <corp-detail class="mt-5" />
     <div class="row mt-5">
       <!-- グラフ -->
       <profit-and-loss

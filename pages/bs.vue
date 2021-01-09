@@ -2,7 +2,7 @@
   <div class="container">
     <global-header />
     <h2 class="mt-5">貸借対照表（B/S）</h2>
-    <corp-detail />
+    <corp-detail class="mt-5" />
     <div class="row mt-5">
       <!-- グラフ -->
       <balance-sheet
