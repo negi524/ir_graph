@@ -2,7 +2,8 @@
   <div class="container">
     <global-header />
     <h2 class="mt-5">キャッシュフロー計算書（C/S）</h2>
-    <div class="row mt-4">
+    <corp-detail class="mt-5" />
+    <div class="row mt-5">
       <!-- グラフ -->
       <cache-flow
         ref="cf"
@@ -47,12 +48,14 @@
 import GlobalHeader from '~/components/GlobalHeader.vue'
 import GlobalFooter from '~/components/GlobalFooter.vue'
 import CacheFlow from '~/components/CacheFlow.vue'
+import CorpDetail from '~/components/CorpDetail.vue'
 
 export default {
   components: {
     GlobalHeader,
     GlobalFooter,
     CacheFlow,
+    CorpDetail,
   },
   data() {
     return {
