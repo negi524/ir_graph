@@ -2,6 +2,20 @@
   <div class="container">
     <global-header />
     <h2 class="mt-5">貸借対照表（B/S）</h2>
+    <table v-if="hasQueryParams" class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">企業名</th>
+          <th scope="col">時期</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ corpName }}</td>
+          <td>{{ quarter }}</td>
+        </tr>
+      </tbody>
+    </table>
     <div class="row mt-4">
       <!-- グラフ -->
       <balance-sheet
@@ -106,6 +120,38 @@ export default {
       // 純資産
       netAssets: 70,
     }
+  },
+  computed: {
+    /**
+     * リクエストパラメータに設定された企業名を取得する
+     */
+    corpName() {
+      if (this.$route.query) {
+        return this.$route.query.name ? this.$route.query.name : null
+      } else {
+        return null
+      }
+    },
+    /**
+     * リクエストパラメータに設定された時期を取得する
+     */
+    quarter() {
+      if (this.$route.query) {
+        return this.$route.query.quarter ? this.$route.query.quarter : null
+      } else {
+        return null
+      }
+    },
+    /**
+     * クエリパラメータがあればtrue
+     */
+    hasQueryParams() {
+      if (!this.$route.query) {
+        return false
+      } else {
+        return this.$route.query.name || this.$route.query.quarter
+      }
+    },
   },
   created() {
     // ローカルストレージにデータが存在すれば取り出してセットする
