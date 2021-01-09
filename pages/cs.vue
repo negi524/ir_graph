@@ -3,10 +3,10 @@
     <global-header />
     <h2 class="mt-5">キャッシュフロー計算書（C/S）</h2>
     <table v-if="hasQueryParams" class="table table-bordered">
-      <thead>
+      <thead class="thead-light">
         <tr>
           <th scope="col">企業名</th>
-          <th scope="col">時期</th>
+          <th scope="col">決算時期</th>
         </tr>
       </thead>
       <tbody>
