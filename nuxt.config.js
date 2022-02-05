@@ -3,7 +3,7 @@ export default {
    ** Nuxt rendering mode
    ** See https://nuxtjs.org/api/configuration-mode
    */
-  mode: 'spa',
+  ssr: false,
   router: {
     base: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/ir_graph/' : '/',
   },
